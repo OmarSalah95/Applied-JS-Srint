@@ -5,15 +5,15 @@ class TabLink {
     this.data == 'all'
       ?this.cards = document.querySelectorAll('.card')
       :this.cards = document.querySelectorAll(`.card[data-tab='${this.data}']`);
-    Array.from(this.cards).map(card => new TabCard(card));
-    this.tabElement.addEventListener("click", e => this.selectTab());
+    this.cards = Array.from(this.cards).map(card => new TabCard(card));
+    this.tabElement.addEventListener("click", e => this.selectTab(e));
   }
 
   selectTab(){
-  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('.active-tab'))
-  this.cards = document.querySelectorAll('.card').forEach(card => card.style.display = 'none')
-  this.tabElement.classList.add('.active-tab')
-  this.cards.forEach(card => card.selectCard());
+  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'))
+  document.querySelectorAll('.card').forEach(card => card.style.display = 'none')
+  this.tabElement.classList.add('active-tab')
+  this.cards.forEach(card => card.selectCard())
   }
 }
 

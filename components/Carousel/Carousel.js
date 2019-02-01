@@ -3,8 +3,10 @@ class Carousel {
       this.carousel = carousel;
       this.leftBtn = carousel.querySelector(".left-button");
       this.rightBtn = carousel.querySelector(".right-button");
-      this.imgList = document.querySelectorAll(".carousel img");
-      console.log(imgList)
+      this.imgList = carousel.querySelectorAll("img");
+      this.leftBtn.addEventListener("click", () => this.cycleLeft());
+      this.rightBtn.addEventListener("click", () => this.cycleRight());
+      
     }
     cycleLeft () {
  

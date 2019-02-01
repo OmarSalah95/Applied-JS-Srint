@@ -8,24 +8,27 @@ class Carousel {
         this.imgList[this.index].style.display = 'block'
         this.leftBtn.addEventListener("click", () => this.cycleLeft());
         this.rightBtn.addEventListener("click", () => this.cycleRight());
-      
     }
     
     cycleLeft () {
-        this.imgList.forEach(img => img.style.display = "none")
+        // this.imgList[this.index].style.display = 'none' ;
+        this.imgList.forEach(img => img.style.opactity = '0')
+        TweenMax.to(this.imgList[this.index] , 2, {x: -1500} )
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1.2, display: 'none', x: 0} )
         this.index === 0
-        ? this.index = this.imgList.length-1
-        : this.index--
-        this.imgList[this.index].style.display = "block";
-        TweenMax.to(imgList[this.index] , 2, {x: 800} )
-        }
-  
+            ? this.index = this.imgList.length-1
+            : this.index--
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1.2, display: 'block', opactity :1} )
+    }
+    
     cycleRight () {
-        this.imgList[this.index].style.display = "none";
+        // this.imgList[this.index].style.display = "none";
+        TweenMax.to(this.imgList[this.index] , 2, {x: 1500} )
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1, display: 'none', x: 0} )
         this.index == this.imgList.length - 1
             ? this.index = 0
             : this.index ++;
-        this.imgList[this.index].style.display = "block";
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1, display: 'block', opactity :1} )
     }
     
   }

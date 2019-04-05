@@ -1,14 +1,36 @@
 class Carousel {
-
-}
-
-let carousel = document.querySelector();
-
-/* If You've gotten this far, you're on your own! Although we will give you some hints:
-    1. You will need to grab a reference to the carousel, and in it grab the laft and right buttons
-    2. You will need to grab a reference to all of the images
-    3. Create a current index
-    4. Those buttons are gonna need some click handlers.
-    5. Think of how you would animate this compoennt. Make the cards slide in and out, or fade. It's up to you!
-    6. Have fun!
-*/
+    constructor (carousel) {
+        this.carousel = carousel;
+        this.leftBtn = carousel.querySelector(".left-button");
+        this.rightBtn = carousel.querySelector(".right-button");
+        this.imgList = carousel.querySelectorAll("img");
+        this.index = 0
+        this.imgList[this.index].style.display = 'block'
+        this.leftBtn.addEventListener("click", () => this.cycleLeft());
+        this.rightBtn.addEventListener("click", () => this.cycleRight());
+    }
+    
+    cycleLeft () {
+        // this.imgList[this.index].style.display = 'none' ;
+        this.imgList.forEach(img => img.style.opactity = '0')
+        TweenMax.to(this.imgList[this.index] , 2, {x: -1500} )
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1.2, display: 'none', x: 0} )
+        this.index === 0
+            ? this.index = this.imgList.length-1
+            : this.index--
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1.2, display: 'block', opactity :1} )
+    }
+    
+    cycleRight () {
+        // this.imgList[this.index].style.display = "none";
+        TweenMax.to(this.imgList[this.index] , 2, {x: 1500} )
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1, display: 'none', x: 0} )
+        this.index == this.imgList.length - 1
+            ? this.index = 0
+            : this.index ++;
+        TweenMax.to(this.imgList[this.index] , 0, { delay: 1, display: 'block', opactity :1} )
+    }
+    
+  }
+   
+  let carousels = document.querySelectorAll(".carousel").forEach(carousel => new Carousel(carousel));
